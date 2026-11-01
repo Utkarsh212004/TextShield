@@ -10,6 +10,8 @@
 - 🗞️ **Fake News Detector** — Classifies news articles as real or fake
 - 📩 **Spam Detector** — Classifies SMS/email messages as spam or legitimate
 
+- 🤖 **AI Explanation** — Claude (Anthropic API) explains in plain English why the text looks fake/real or spam/legit
+
 ## 📊 Model Performance
 | Task | Algorithm | Accuracy | F1 Score |
 |------|-----------|----------|----------|
@@ -25,6 +27,7 @@
 - **ML:** Scikit-learn, NLTK
 - **Vectorization:** TF-IDF (5,000 features, bigrams)
 - **Models:** Logistic Regression, Naive Bayes, Linear SVM
+- **LLM:** Anthropic API (Claude Haiku) for prediction explanations
 - **App:** Streamlit
 - **Version Control:** Git & GitHub
 
@@ -35,6 +38,14 @@ cd TextShield
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+### Enable the AI explanation (optional)
+Create `.streamlit/secrets.toml` (it is git-ignored) and add your key:
+```toml
+ANTHROPIC_API_KEY = "your-key-here"
+```
+Without a key the app still works, it just skips the explanation.
+On Streamlit Cloud, add the same line under Settings → Secrets.
 
 ## 👨‍💻 Built by
 **Utkarsh Jain** — MCA AI & Data Science  
