@@ -4,6 +4,7 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from llm_explain import explain
 
 nltk.download('stopwords', quiet=True)
 nltk.download('punkt', quiet=True)
@@ -443,6 +444,13 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
 
+            with st.spinner("Asking Claude to explain..."):
+                label = "fake news" if pred == 0 else "real news"
+                reason = explain(fn_text, label, confidence, "fake news")
+            if reason:
+                st.markdown("#### 🤖 AI explanation")
+                st.info(reason)
+
             with st.expander("🔬 See cleaned tokens fed to model"):
                 st.code(cleaned, language=None)
 
@@ -520,6 +528,13 @@ with tab2:
                 </div>
             </div>
             """, unsafe_allow_html=True)
+
+            with st.spinner("Asking Claude to explain..."):
+                label = "spam" if pred == 1 else "not spam"
+                reason = explain(sp_text, label, confidence, "spam")
+            if reason:
+                st.markdown("#### 🤖 AI explanation")
+                st.info(reason)
 
             with st.expander("🔬 See cleaned tokens fed to model"):
                 st.code(cleaned, language=None)
